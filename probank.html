@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROBANK - حلول مالية مبتكرة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { cairo: ['Cairo', 'sans-serif'] },
+                    colors: {
+                        primary: '#0D9488',
+                        secondary: '#134E4A',
+                        dark: '#0F172A',
+                        darker: '#020617',
+                        accent: '#14B8A6',
+                        light: '#F0FDFA',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Cairo', sans-serif; }
+        body { background-color: #F0FDFA; }
+        .gradient-text { background: linear-gradient(135deg, #0D9488, #14B8A6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(13, 148, 136, 0.1); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); }
+        .dark-glass { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; right: 0; width: 0; height: 2px; background: #0D9488; transition: width 0.3s; }
+        .nav-link:hover::after { width: 100%; }
+        .sidebar-item { transition: all 0.3s; }
+        .sidebar-item:hover, .sidebar-item.active { background: rgba(13, 148, 136, 0.1); border-right: 3px solid #0D9488; }
+        .scroll-hidden::-webkit-scrollbar { display: none; }
+        .scroll-hidden { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .float-anim { animation: float 3s ease-in-out infinite; }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 5px rgba(13, 148, 136, 0.5); } 50% { box-shadow: 0 0 20px rgba(13, 148, 136, 0.8); } }
+        .pulse-glow { animation: pulse-glow 2s infinite; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-enter { animation: modalEnter 0.3s ease-out; }
+        @keyframes modalEnter { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .phone-mockup { border: 12px solid #1E293B; border-radius: 40px; overflow: hidden; position: relative; }
+        .phone-mockup::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 150px; height: 25px; background: #1E293B; border-radius: 0 0 20px 20px; z-index: 10; }
+        .wave-bg { background: linear-gradient(135deg, #0D9488 0%, #134E4A 50%, #0F172A 100%); }
+        .service-card { transition: all 0.3s ease; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(13, 148, 136, 0.15); }
+        .feature-icon { transition: all 0.3s; }
+        .service-card:hover .feature-icon { transform: scale(1.1) rotate(5deg); }
+        .stat-counter { font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- ==================== PUBLIC SITE ==================== -->
+    <div id="public-site">
+        <!-- Top Bar -->
+        <div class="bg-secondary text-white py-2 text-sm">
+            <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+                <div class="flex items-center gap-6">
+                    <span><i class="fas fa-phone ml-2"></i> 00963-011-222-3333</span>
+                    <span><i class="fas fa-envelope ml-2"></i> support@probank.com</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="hover:text-accent transition"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="hover:text-accent transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-accent transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-accent transition"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-primary/10 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-white text-2xl">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-black gradient-text">PROBANK</span>
+                            <div class="text-xs text-gray-500">حلول مالية مبتكرة</div>
+                        </div>
+                    </div>
+                    <div class="hidden lg:flex items-center gap-8">
+                        <a href="#home" class="nav-link text-gray-700 hover:text-primary transition font-medium">الرئيسية</a>
+                        <a href="#about" class="nav-link text-gray-700 hover:text-primary transition font-medium">من نحن</a>
+                        <a href="#services" class="nav-link text-gray-700 hover:text-primary transition font-medium">خدماتنا</a>
+                        <a href="#features" class="nav-link text-gray-700 hover:text-primary transition font-medium">مميزاتنا</a>
+                        <a href="#app" class="nav-link text-gray-700 hover:text-primary transition font-medium">التطبيق</a>
+                        <a href="#contact" class="nav-link text-gray-700 hover:text-primary transition font-medium">تواصل معنا</a>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button onclick="showLogin()" class="hidden md:block text-primary hover:text-secondary transition font-medium">تسجيل الدخول</button>
+                        <button onclick="showRegister()" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-secondary transition pulse-glow">
+                            فتح حساب
+                        </button>
+                        <button onclick="showAdminLogin()" class="text-gray-400 hover:text-primary text-sm" title="لوحة الإدارة">
+                            <i class="fas fa-cog text-lg"></i>
+                        </button>
+                        <button class="lg:hidden text-gray-700" onclick="toggleMobileMenu()">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100">
+                <div class="px-4 py-3 space-y-2">
+                    <a href="#home" class="block py-3 text-gray-700 hover:text-primary transition border-b border-gray-100">الرئيسية</a>
+                    <a href="#about" class="block py-3 text-gray-700 hover:text-primary transition border-b border-gray-100">من نحن</a>
+                    <a href="#services" class="block py-3 text-gray-700 hover:text-primary transition border-b border-gray-100">خدماتنا</a>
+                    <a href="#features" class="block py-3 text-gray-700 hover:text-primary transition border-b border-gray-100">مميزاتنا</a>
+                    <a href="#app" class="block py-3 text-gray-700 hover:text-primary transition border-b border-gray-100">التطبيق</a>
+                    <a href="#contact" class="block py-3 text-gray-700 hover:text-primary transition">تواصل معنا</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="wave-bg text-white pt-20 pb-32 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center lg:text-right">
+                        <div class="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sm mb-6 backdrop-blur-sm">
+                            <i class="fas fa-star ml-2 text-yellow-400"></i> بنك إلكتروني رائد في سوريا
+                        </div>
+                        <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+                            حلول مالية<br><span class="text-accent">مبتكرة</span> وآمنة
+                        </h1>
+                        <p class="text-white/80 text-lg mb-8 leading-relaxed max-w-xl">
+                            PROBANK يقدم لك خدمات مالية متكاملة تشمل الدفع الإلكتروني، التحويلات المالية، وإدارة الأموال بكل سهولة وأمان.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <button onclick="showRegister()" class="bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+                                <i class="fas fa-play ml-2"></i> ابدأ الآن
+                            </button>
+                            <button onclick="scrollToSection('app')" class="border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition">
+                                <i class="fas fa-mobile-screen ml-2"></i> حمل التطبيق
+                            </button>
+                        </div>
+                        <div class="mt-10 flex items-center gap-6 justify-center lg:justify-start">
+                            <div class="text-center">
+                                <div class="text-3xl font-black">+50K</div>
+                                <div class="text-sm text-white/60">مستخدم</div>
+                            </div>
+                            <div class="w-px h-12 bg-white/20"></div>
+                            <div class="text-center">
+                                <div class="text-3xl font-black">+1M</div>
+                                <div class="text-sm text-white/60">معاملة</div>
+                            </div>
+                            <div class="w-px h-12 bg-white/20"></div>
+                            <div class="text-center">
+                                <div class="text-3xl font-black">99.9%</div>
+                                <div class="text-sm text-white/60">أمان</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative hidden lg:block">
+                        <div class="phone-mockup w-72 mx-auto float-anim bg-white">
+                            <div class="bg-primary p-4 pt-8 text-white">
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="font-bold">PROBANK</span>
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <div class="bg-white/20 rounded-xl p-4 mb-4">
+                                    <div class="text-sm text-white/80">الرصيد</div>
+                                    <div class="text-2xl font-black">$12,450.00</div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-gray-50">
+                                <div class="grid grid-cols-3 gap-2 mb-4">
+                                    <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                        <i class="fas fa-paper-plane text-primary mb-1"></i>
+                                        <div class="text-xs">إرسال</div>
+                                    </div>
+                                    <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                        <i class="fas fa-download text-accent mb-1"></i>
+                                        <div class="text-xs">استلام</div>
+                                    </div>
+                                    <div class="bg-white rounded-xl p-3 text-center shadow-sm">
+                                        <i class="fas fa-wallet text-primary mb-1"></i>
+                                        <div class="text-xs">محفظة</div>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="bg-white rounded-xl p-3 flex justify-between items-center shadow-sm">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center"><i class="fas fa-arrow-up text-primary text-xs"></i></div>
+                                            <div>
+                                                <div class="text-sm font-bold">تحويل لأحمد</div>
+                                                <div class="text-xs text-gray-400">اليوم</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-danger font-bold text-sm">-$250</div>
+                                    </div>
+                                    <div class="bg-white rounded-xl p-3 flex justify-between items-center shadow-sm">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-arrow-down text-accent text-xs"></i></div>
+                                            <div>
+                                                <div class="text-sm font-bold">استلام من محمد</div>
+                                                <div class="text-xs text-gray-400">أمس</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-primary font-bold text-sm">+$1,200</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Floating Cards -->
+                        <div class="absolute -top-4 -right-4 glass-card rounded-xl p-3 float-anim shadow-lg" style="animation-delay: 0.5s">
+                            <div class="flex items-center gap-2">
+                                <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                                    <i class="fas fa-shield-halved text-accent"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500">حماية</div>
+                                    <div class="text-sm font-bold text-primary">256-bit</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 glass-card rounded-xl p-3 float-anim shadow-lg" style="animation-delay: 1s">
+                            <div class="flex items-center gap-2">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <i class="fas fa-bolt text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500">سرعة</div>
+                                    <div class="text-sm font-bold text-primary">فورية</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Wave Bottom -->
+            <div class="absolute bottom-0 left-0 right-0">
+                <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F0FDFA"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-primary font-bold text-sm tracking-wider">من نحن</span>
+                    <h2 class="text-3xl md:text-4xl font-black mt-2 text-gray-900">شريكك الموثوق في <span class="gradient-text">العالم الرقمي</span></h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">PROBANK هو بنك إلكتروني رائد يقدم حلولاً مالية متكاملة للأفراد والشركات</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-primary/10 rounded-3xl transform -rotate-3"></div>
+                        <div class="glass-card rounded-3xl p-8 relative">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-light rounded-xl p-6 text-center border border-primary/10">
+                                    <i class="fas fa-shield-halved text-primary text-4xl mb-3"></i>
+                                    <div class="font-bold text-gray-900">أمان تام</div>
+                                    <div class="text-sm text-gray-500">تشفير بنكي متقدم</div>
+                                </div>
+                                <div class="bg-light rounded-xl p-6 text-center border border-primary/10">
+                                    <i class="fas fa-bolt text-accent text-4xl mb-3"></i>
+                                    <div class="font-bold text-gray-900">سرعة فائقة</div>
+                                    <div class="text-sm text-gray-500">تحويلات فورية</div>
+                                </div>
+                                <div class="bg-light rounded-xl p-6 text-center border border-primary/10">
+                                    <i class="fas fa-headset text-primary text-4xl mb-3"></i>
+                                    <div class="font-bold text-gray-900">دعم 24/7</div>
+                                    <div class="text-sm text-gray-500">فريق متخصص</div>
+                                </div>
+                                <div class="bg-light rounded-xl p-6 text-center border border-primary/10">
+                                    <i class="fas fa-mobile-screen text-accent text-4xl mb-3"></i>
+                                    <div class="font-bold text-gray-900">تطبيق ذكي</div>
+                                    <div class="text-sm text-gray-500">إدارة من أي مكان</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900">نبني مستقبل المدفوعات الرقمية معاً</h3>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            PROBANK هو بنك إلكتروني متكامل يقدم خدمات مالية مبتكرة للأفراد والشركات. نحن نؤمن بأن التكنولوجيا يمكن أن تجعل الخدمات المالية أكثر سهولة وأماناً للجميع.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            منذ تأسيسنا، ساعدنا آلاف المستخدمين في إدارة أموالهم بكفاءة مع توفير أعلى معايير الأمان والموثوقية في كل معاملة.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-check-circle text-primary text-xl"></i>
+                                <span class="text-gray-700">تراخيص رسمية</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-check-circle text-primary text-xl"></i>
+                                <span class="text-gray-700">شفافية كاملة</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-check-circle text-primary text-xl"></i>
+                                <span class="text-gray-700">رسوم منخفضة</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-check-circle text-primary text-xl"></i>
+                                <span class="text-gray-700">دعم فني متواصل</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-primary font-bold text-sm tracking-wider">خدماتنا</span>
+                    <h2 class="text-3xl md:text-4xl font-black mt-2 text-gray-900">حلول مالية <span class="gradient-text">متكاملة</span></h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">نوفر لك مجموعة واسعة من الخدمات المالية المصممة لتلبية جميع احتياجاتك</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="service-card glass-card rounded-2xl p-8 border border-gray-100">
+                        <div class="feature-icon w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+                            <i class="fas fa-paper-plane text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">التحويلات المالية</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">أرسل واستلم الأموال فورياً إلى أي مكان في العالم بأقل الرسوم وأعلى سرعة.</p>
+                    </div>
+                    <div class="service-card glass-card rounded-2xl p-8 border border-gray-100">
+                        <div class="feature-icon w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
+                            <i class="fas fa-wallet text-accent text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">المحفظة الإلكترونية</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">محفظة رقمية آمنة لإدارة أموالك وإجراء المدفوعات بكل سهولة.</p>
+                    </div>
+                    <div class="service-card glass-card rounded-2xl p-8 border border-gray-100">
+                        <div class="feature-icon w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+                            <i class="fas fa-credit-card text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">بطاقات الدفع</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">بطاقات افتراضية ومادية للتسوق أونلاين وفي المتاجر بأمان تام.</p>
+                    </div>
+                    <div class="service-card glass-card rounded-2xl p-8 border border-gray-100">
+                        <div class="feature-icon w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
+                            <i class="fas fa-mobile-screen-button text-accent text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">شحن الرصيد</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">شحن رصيد الهاتف المحمول لجميع الشركات بضغطة واحدة.</p>
+                    </div>
+                    <div class="service-card glass-card rounded-2xl p-8 border border-gray-100">
+                        <div class="feature-icon w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+                            <i class="fas fa-file-invoice-dollar text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">دفع الفواتير</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">دفع جميع الفواتير (كهرباء، ماء، إنترنت، تلفون) من مكان واحد.</p>
+                    </div>
+                    <div class="service-card glass-card rounded-2xl p-8 border border-gray-100">
+                        <div class="feature-icon w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
+                            <i class="fas fa-chart-line text-accent text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">التقارير المالية</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">تقارير مفصلة عن حركاتك المالية وتحليلات ذكية لإدارة أموالك.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-primary font-bold text-sm tracking-wider">مميزاتنا</span>
+                    <h2 class="text-3xl md:text-4xl font-black mt-2 text-gray-900">لماذا تختار <span class="gradient-text">PROBANK</span>؟</h2>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-card rounded-2xl p-6 text-center border border-gray-100 hover:border-primary/30 transition">
+                        <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shield-halved text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">أمان بنكي</h3>
+                        <p class="text-sm text-gray-600">تشفير 256-bit وحماية متعددة الطبقات لجميع معاملاتك</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 text-center border border-gray-100 hover:border-primary/30 transition">
+                        <div class="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bolt text-accent text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">سرعة فائقة</h3>
+                        <p class="text-sm text-gray-600">تحويلات فورية خلال ثوانٍ فقط دون أي تأخير</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 text-center border border-gray-100 hover:border-primary/30 transition">
+                        <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-percent text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">رسوم منخفضة</h3>
+                        <p class="text-sm text-gray-600">أقل رسوم في السوق مع شفافية تامة في التسعير</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 text-center border border-gray-100 hover:border-primary/30 transition">
+                        <div class="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-headset text-accent text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">دعم على مدار الساعة</h3>
+                        <p class="text-sm text-gray-600">فريق دعم متخصص جاهز لمساعدتك في أي وقت</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Section -->
+        <section id="app" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1">
+                        <span class="text-primary font-bold text-sm tracking-wider">التطبيق</span>
+                        <h2 class="text-3xl md:text-4xl font-black mt-2 mb-6 text-gray-900">حمل تطبيق <span class="gradient-text">PROBANK</span><br>وتحكم بأموالك</h2>
+                        <p class="text-gray-600 leading-relaxed mb-8">
+                            تطبيق PROBANK يوفر لك كل الخدمات المالية في جيبك. أرسل الأموال، ادفع الفواتير، اشحن رصيدك، وتابع حركاتك المالية بكل سهولة وأمان.
+                        </p>
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-fingerprint text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-900">تسجيل دخول بيومتري</div>
+                                    <div class="text-sm text-gray-500">بصمة الوجه أو البصمة للوصول الآمن</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-bell text-accent text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-900">إشعارات فورية</div>
+                                    <div class="text-sm text-gray-500">تنبيهات لحظية لكل معاملة</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-chart-pie text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-900">تحليلات ذكية</div>
+                                    <div class="text-sm text-gray-500">رؤى مالية لإدارة أموالك بذكاء</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <button class="bg-dark text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-gray-800 transition">
+                                <i class="fab fa-apple text-2xl"></i>
+                                <div class="text-left">
+                                    <div class="text-xs">حمل من</div>
+                                    <div class="font-bold">App Store</div>
+                                </div>
+                            </button>
+                            <button class="bg-dark text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-gray-800 transition">
+                                <i class="fab fa-google-play text-2xl"></i>
+                                <div class="text-left">
+                                    <div class="text-xs">حمل من</div>
+                                    <div class="font-bold">Google Play</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="order-1 lg:order-2 relative">
+                        <div class="absolute inset-0 bg-primary/10 rounded-full blur-3xl"></div>
+                        <div class="phone-mockup w-72 mx-auto float-anim bg-white relative z-10">
+                            <div class="bg-primary p-4 pt-8 text-white">
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="font-bold text-lg">PROBANK</span>
+                                    <div class="flex gap-2">
+                                        <i class="fas fa-bell"></i>
+                                        <i class="fas fa-gear"></i>
+                                    </div>
+                                </div>
+                                <div class="bg-white/20 rounded-xl p-4 mb-4 backdrop-blur-sm">
+                                    <div class="text-sm text-white/80">الرصيد الكلي</div>
+                                    <div class="text-3xl font-black">$12,450.00</div>
+                                    <div class="text-xs text-white/60 mt-1">+ $250 هذا الشهر</div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-gray-50">
+                                <div class="grid grid-cols-4 gap-2 mb-4">
+                                    <div class="bg-white rounded-xl p-2 text-center shadow-sm">
+                                        <i class="fas fa-paper-plane text-primary mb-1 text-sm"></i>
+                                        <div class="text-xs">إرسال</div>
+                                    </div>
+                                    <div class="bg-white rounded-xl p-2 text-center shadow-sm">
+                                        <i class="fas fa-download text-accent mb-1 text-sm"></i>
+                                        <div class="text-xs">استلام</div>
+                                    </div>
+                                    <div class="bg-white rounded-xl p-2 text-center shadow-sm">
+                                        <i class="fas fa-wallet text-primary mb-1 text-sm"></i>
+                                        <div class="text-xs">محفظة</div>
+                                    </div>
+                                    <div class="bg-white rounded-xl p-2 text-center shadow-sm">
+                                        <i class="fas fa-qrcode text-accent mb-1 text-sm"></i>
+                                        <div class="text-xs">مسح</div>
+                                    </div>
+                                </div>
+                                <div class="text-sm font-bold text-gray-700 mb-2">آخر المعاملات</div>
+                                <div class="space-y-2">
+                                    <div class="bg-white rounded-xl p-3 flex justify-between items-center shadow-sm">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center"><i class="fas fa-arrow-up text-primary text-xs"></i></div>
+                                            <div>
+                                                <div class="text-sm font-bold">تحويل لأحمد</div>
+                                                <div class="text-xs text-gray-400">اليوم 10:30</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-red-500 font-bold text-sm">-$250</div>
+                                    </div>
+                                    <div class="bg-white rounded-xl p-3 flex justify-between items-center shadow-sm">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-arrow-down text-accent text-xs"></i></div>
+                                            <div>
+                                                <div class="text-sm font-bold">استلام من محمد</div>
+                                                <div class="text-xs text-gray-400">أمس 14:20</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-primary font-bold text-sm">+$1,200</div>
+                                    </div>
+                                    <div class="bg-white rounded-xl p-3 flex justify-between items-center shadow-sm">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center"><i class="fas fa-bolt text-primary text-xs"></i></div>
+                                            <div>
+                                                <div class="text-sm font-bold">شحن رصيد</div>
+                                                <div class="text-xs text-gray-400">أمس 09:15</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-red-500 font-bold text-sm">-$10</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-primary font-bold text-sm tracking-wider">تواصل معنا</span>
+                    <h2 class="text-3xl md:text-4xl font-black mt-2 text-gray-900">نحن هنا <span class="gradient-text">للمساعدة</span></h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">فريقنا جاهز للإجابة على جميع استفساراتك ومساعدتك في أي وقت</p>
+                </div>
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-1 space-y-6">
+                        <div class="glass-card rounded-2xl p-6 flex items-center gap-4 border border-gray-100">
+                            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-location-dot text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900">العنوان</div>
+                                <div class="text-sm text-gray-500">دمشق، سوريا - شارع الحمراء</div>
+                            </div>
+                        </div>
+                        <div class="glass-card rounded-2xl p-6 flex items-center gap-4 border border-gray-100">
+                            <div class="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900">الهاتف</div>
+                                <div class="text-sm text-gray-500">00963-011-222-3333</div>
+                            </div>
+                        </div>
+                        <div class="glass-card rounded-2xl p-6 flex items-center gap-4 border border-gray-100">
+                            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900">البريد الإلكتروني</div>
+                                <div class="text-sm text-gray-500">support@probank.com</div>
+                            </div>
+                        </div>
+                        <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                            <div class="font-bold text-gray-900 mb-4">تابعنا</div>
+                            <div class="flex gap-3">
+                                <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition"><i class="fab fa-telegram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <div class="glass-card rounded-2xl p-8 border border-gray-100">
+                            <form onsubmit="handleContactSubmit(event)">
+                                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <label class="block text-sm font-bold mb-2 text-gray-700">الاسم الكامل</label>
+                                        <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="محمد أحمد" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold mb-2 text-gray-700">البريد الإلكتروني</label>
+                                        <input type="email" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="email@example.com" required>
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-sm font-bold mb-2 text-gray-700">الموضوع</label>
+                                    <select class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition">
+                                        <option>استفسار عام</option>
+                                        <option>دعم فني</option>
+                                        <option>شكوى</option>
+                                        <option>اقتراح</option>
+                                        <option>شراكة</option>
+                                    </select>
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-sm font-bold mb-2 text-gray-700">الرسالة</label>
+                                    <textarea class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 h-32 resize-none focus:border-primary focus:outline-none transition" placeholder="اكتب رسالتك هنا..." required></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-primary text-white py-4 rounded-xl font-bold hover:bg-secondary transition">
+                                    <i class="fas fa-paper-plane ml-2"></i> إرسال الرسالة
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-4 gap-8 mb-12">
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-white text-xl">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div>
+                                <span class="text-xl font-black">PROBANK</span>
+                                <div class="text-xs text-gray-400">حلول مالية مبتكرة</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">بنك إلكتروني رائد يقدم خدمات مالية متكاملة بأعلى معايير الأمان والموثوقية.</p>
+                        <div class="flex gap-3">
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-6">روابط سريعة</h4>
+                        <ul class="space-y-3 text-sm text-gray-400">
+                            <li><a href="#home" class="hover:text-primary transition">الرئيسية</a></li>
+                            <li><a href="#about" class="hover:text-primary transition">من نحن</a></li>
+                            <li><a href="#services" class="hover:text-primary transition">خدماتنا</a></li>
+                            <li><a href="#features" class="hover:text-primary transition">مميزاتنا</a></li>
+                            <li><a href="#contact" class="hover:text-primary transition">تواصل معنا</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-6">الخدمات</h4>
+                        <ul class="space-y-3 text-sm text-gray-400">
+                            <li><a href="#" class="hover:text-primary transition">التحويلات المالية</a></li>
+                            <li><a href="#" class="hover:text-primary transition">المحفظة الإلكترونية</a></li>
+                            <li><a href="#" class="hover:text-primary transition">بطاقات الدفع</a></li>
+                            <li><a href="#" class="hover:text-primary transition">شحن الرصيد</a></li>
+                            <li><a href="#" class="hover:text-primary transition">دفع الفواتير</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-6">النشرة البريدية</h4>
+                        <p class="text-gray-400 text-sm mb-4">اشترك للحصول على آخر الأخبار والعروض.</p>
+                        <div class="flex">
+                            <input type="email" placeholder="بريدك الإلكتروني" class="flex-1 bg-white/10 border border-white/20 rounded-r-xl px-4 py-3 focus:border-primary focus:outline-none text-sm">
+                            <button class="bg-primary px-4 py-3 rounded-l-xl font-bold hover:bg-secondary transition text-sm">اشتراك</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-gray-500 text-sm">© 2024 PROBANK. جميع الحقوق محفوظة.</div>
+                    <div class="flex gap-6 text-sm text-gray-500">
+                        <a href="#" class="hover:text-primary transition">شروط الاستخدام</a>
+                        <a href="#" class="hover:text-primary transition">سياسة الخصوصية</a>
+                        <a href="#" class="hover:text-primary transition">التراخيص</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ==================== AUTH MODALS ==================== -->
+    <!-- Login Modal -->
+    <div id="login-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="glass-card rounded-3xl p-8 w-full max-w-md mx-4 relative modal-enter border border-gray-200 shadow-2xl">
+            <button onclick="closeModal('login-modal')" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600 transition"><i class="fas fa-times text-xl"></i></button>
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-university text-primary text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-black text-gray-900">تسجيل الدخول</h2>
+                <p class="text-gray-500 text-sm mt-2">أهلاً بعودتك! سجل دخولك للمتابعة</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-700">رقم الهاتف أو البريد</label>
+                    <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="example@email.com" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-700">كلمة المرور</label>
+                    <input type="password" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="••••••••" required>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-300 text-primary focus:ring-primary">
+                        <span class="text-gray-500">تذكرني</span>
+                    </label>
+                    <a href="#" class="text-primary hover:underline font-medium">نسيت كلمة المرور؟</a>
+                </div>
+                <button type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-bold hover:bg-secondary transition">
+                    <i class="fas fa-sign-in-alt ml-2"></i> تسجيل الدخول
+                </button>
+            </form>
+            <div class="mt-6 text-center text-sm">
+                <span class="text-gray-500">ليس لديك حساب؟</span>
+                <button onclick="switchAuth('register')" class="text-primary font-bold mr-1 hover:underline">سجل الآن</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="glass-card rounded-3xl p-8 w-full max-w-md mx-4 relative modal-enter border border-gray-200 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('register-modal')" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600 transition"><i class="fas fa-times text-xl"></i></button>
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-plus text-primary text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-black text-gray-900">فتح حساب جديد</h2>
+                <p class="text-gray-500 text-sm mt-2">انضم إلى آلاف المستخدمين في PROBANK</p>
+            </div>
+            <form onsubmit="handleRegister(event)" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-gray-700">الاسم الأول</label>
+                        <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-gray-700">الاسم الأخير</label>
+                        <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-700">البريد الإلكتروني</label>
+                    <input type="email" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="example@email.com" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-700">رقم الهاتف</label>
+                    <input type="tel" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="+963 9XX XXX XXX" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-700">رقم الهوية</label>
+                    <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="رقم البطاقة الشخصية" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-700">كلمة المرور</label>
+                    <input type="password" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="••••••••" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-700">تأكيد كلمة المرور</label>
+                    <input type="password" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="••••••••" required>
+                </div>
+                <label class="flex items-start gap-2 cursor-pointer">
+                    <input type="checkbox" required class="mt-1 rounded border-gray-300 text-primary focus:ring-primary">
+                    <span class="text-sm text-gray-500">أوافق على <a href="#" class="text-primary">شروط الاستخدام</a> و <a href="#" class="text-primary">سياسة الخصوصية</a></span>
+                </label>
+                <button type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-bold hover:bg-secondary transition">
+                    <i class="fas fa-user-check ml-2"></i> فتح الحساب
+                </button>
+            </form>
+            <div class="mt-6 text-center text-sm">
+                <span class="text-gray-500">لديك حساب بالفعل؟</span>
+                <button onclick="switchAuth('login')" class="text-primary font-bold mr-1 hover:underline">سجل دخولك</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="glass-card rounded-3xl p-8 w-full max-w-md mx-4 relative modal-enter border border-gray-200 shadow-2xl">
+            <button onclick="closeModal('admin-login-modal')" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600 transition"><i class="fas fa-times text-xl"></i></button>
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shield-halved text-primary text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-black text-gray-900">لوحة الإدارة</h2>
+                <p class="text-gray-500 text-sm mt-2">تسجيل دخول المشرفين</p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-700">اسم المستخدم</label>
+                    <input type="text" id="admin-username" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="admin" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold mb-2 text-gray-700">كلمة المرور</label>
+                    <input type="password" id="admin-password" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-bold hover:bg-secondary transition">
+                    <i class="fas fa-lock ml-2"></i> دخول لوحة الإدارة
+                </button>
+            </form>
+            <div class="mt-4 p-3 bg-primary/5 rounded-xl text-center text-sm border border-primary/10">
+                <span class="text-primary font-bold">بيانات التجربة: </span>
+                <span class="text-gray-500">admin / admin123</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ADMIN DASHBOARD ==================== -->
+    <div id="admin-dashboard" class="hidden bg-gray-100 min-h-screen">
+        <!-- Sidebar -->
+        <aside class="fixed right-0 top-0 h-full w-64 bg-white border-l border-gray-200 z-40 overflow-y-auto shadow-lg" id="admin-sidebar">
+            <div class="p-6 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-900">PROBANK</div>
+                        <div class="text-xs text-gray-500">لوحة الإدارة</div>
+                    </div>
+                </div>
+            </div>
+            <nav class="p-4 space-y-1">
+                <button onclick="showAdminSection('dashboard')" class="sidebar-item active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700" id="nav-dashboard">
+                    <i class="fas fa-chart-line w-5 text-primary"></i>
+                    <span>لوحة التحكم</span>
+                </button>
+                <button onclick="showAdminSection('users')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700" id="nav-users">
+                    <i class="fas fa-users w-5 text-gray-400"></i>
+                    <span>المستخدمين</span>
+                </button>
+                <button onclick="showAdminSection('transactions')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700" id="nav-transactions">
+                    <i class="fas fa-exchange-alt w-5 text-gray-400"></i>
+                    <span>المعاملات</span>
+                </button>
+                <button onclick="showAdminSection('transfers')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700" id="nav-transfers">
+                    <i class="fas fa-paper-plane w-5 text-gray-400"></i>
+                    <span>التحويلات</span>
+                </button>
+                <button onclick="showAdminSection('wallets')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700" id="nav-wallets">
+                    <i class="fas fa-wallet w-5 text-gray-400"></i>
+                    <span>المحافظ</span>
+                </button>
+                <button onclick="showAdminSection('cards')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700" id="nav-cards">
+                    <i class="fas fa-credit-card w-5 text-gray-400"></i>
+                    <span>البطاقات</span>
+                </button>
+                <button onclick="showAdminSection('bills')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700" id="nav-bills">
+                    <i class="fas fa-file-invoice-dollar w-5 text-gray-400"></i>
+                    <span>الفواتير</span>
+                </button>
+                <button onclick="showAdminSection('reports')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700" id="nav-reports">
+                    <i class="fas fa-chart-pie w-5 text-gray-400"></i>
+                    <span>التقارير</span>
+                </button>
+                <button onclick="showAdminSection('messages')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700" id="nav-messages">
+                    <i class="fas fa-envelope w-5 text-gray-400"></i>
+                    <span>الرسائل</span>
+                    <span class="mr-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">5</span>
+                </button>
+                <button onclick="showAdminSection('settings')" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700" id="nav-settings">
+                    <i class="fas fa-cog w-5 text-gray-400"></i>
+                    <span>الإعدادات</span>
+                </button>
+            </nav>
+            <div class="absolute bottom-0 right-0 w-full p-4 border-t border-gray-100 bg-white">
+                <button onclick="logoutAdmin()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 transition">
+                    <i class="fas fa-sign-out-alt w-5"></i>
+                    <span>تسجيل الخروج</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="mr-64 min-h-screen" id="admin-main">
+            <!-- Header -->
+            <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center sticky top-0 z-30">
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleSidebar()" class="lg:hidden text-gray-500 hover:text-primary transition"><i class="fas fa-bars text-xl"></i></button>
+                    <h1 class="text-xl font-black text-gray-900" id="admin-title">لوحة التحكم</h1>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="relative p-2 text-gray-400 hover:text-primary transition">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+                    </button>
+                    <div class="flex items-center gap-3">
+                        <div class="text-right hidden sm:block">
+                            <div class="font-bold text-sm text-gray-900">المشرف العام</div>
+                            <div class="text-xs text-gray-500">مدير النظام</div>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold border-2 border-primary/20">م</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <div id="section-dashboard" class="p-8">
+                <!-- Stats Cards -->
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="text-gray-500 text-sm">إجمالي المستخدمين</div>
+                                <div class="text-3xl font-black text-gray-900 mt-1 stat-counter">12,847</div>
+                            </div>
+                            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                                <i class="fas fa-users text-primary text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="text-green-500 text-sm font-medium"><i class="fas fa-arrow-up ml-1"></i> +12.5% هذا الشهر</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="text-gray-500 text-sm">إجمالي الرصيد</div>
+                                <div class="text-3xl font-black text-gray-900 mt-1 stat-counter">$4.2M</div>
+                            </div>
+                            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                                <i class="fas fa-dollar-sign text-accent text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="text-green-500 text-sm font-medium"><i class="fas fa-arrow-up ml-1"></i> +8.3% هذا الشهر</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="text-gray-500 text-sm">المعاملات اليوم</div>
+                                <div class="text-3xl font-black text-gray-900 mt-1 stat-counter">1,234</div>
+                            </div>
+                            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                                <i class="fas fa-exchange-alt text-primary text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="text-green-500 text-sm font-medium"><i class="fas fa-arrow-up ml-1"></i> +156 عن الأمس</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="text-gray-500 text-sm">الإيرادات</div>
+                                <div class="text-3xl font-black text-gray-900 mt-1 stat-counter">$18,420</div>
+                            </div>
+                            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                                <i class="fas fa-chart-line text-accent text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="text-red-500 text-sm font-medium"><i class="fas fa-arrow-down ml-1"></i> -2.1% عن الأمس</div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-gray-900">حركة المعاملات</h3>
+                            <select class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-1 text-sm focus:border-primary focus:outline-none" onchange="updateChart(this.value)">
+                                <option value="7">آخر 7 أيام</option>
+                                <option value="30">آخر 30 يوم</option>
+                                <option value="365">آخر سنة</option>
+                            </select>
+                        </div>
+                        <canvas id="transactionChart" height="200"></canvas>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-gray-900">توزيع الخدمات</h3>
+                        </div>
+                        <canvas id="servicesChart" height="200"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-gray-900">آخر المعاملات</h3>
+                        <button class="text-primary text-sm font-medium hover:underline">عرض الكل</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-gray-500 text-sm border-b border-gray-200">
+                                    <th class="text-right py-3 px-4 font-medium">رقم العملية</th>
+                                    <th class="text-right py-3 px-4 font-medium">المستخدم</th>
+                                    <th class="text-right py-3 px-4 font-medium">النوع</th>
+                                    <th class="text-right py-3 px-4 font-medium">المبلغ</th>
+                                    <th class="text-right py-3 px-4 font-medium">الحالة</th>
+                                    <th class="text-right py-3 px-4 font-medium">التاريخ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm" id="activity-table">
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-3 px-4 font-mono text-xs text-gray-500">#TRX-001234</td>
+                                    <td class="py-3 px-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">ع</div><span class="font-medium text-gray-900">عبدالله الشمري</span></div></td>
+                                    <td class="py-3 px-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">إيداع</span></td>
+                                    <td class="py-3 px-4 text-green-600 font-bold">+$5,000</td>
+                                    <td class="py-3 px-4"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">مكتمل</span></td>
+                                    <td class="py-3 px-4 text-gray-500">2024-03-15 10:30</td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-3 px-4 font-mono text-xs text-gray-500">#TRX-001233</td>
+                                    <td class="py-3 px-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent font-bold text-xs">ف</div><span class="font-medium text-gray-900">فاطمة الزهراء</span></div></td>
+                                    <td class="py-3 px-4"><span class="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-medium">سحب</span></td>
+                                    <td class="py-3 px-4 text-red-600 font-bold">-$1,200</td>
+                                    <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-medium">قيد المعالجة</span></td>
+                                    <td class="py-3 px-4 text-gray-500">2024-03-15 09:15</td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-3 px-4 font-mono text-xs text-gray-500">#TRX-001232</td>
+                                    <td class="py-3 px-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">م</div><span class="font-medium text-gray-900">محمد العلي</span></div></td>
+                                    <td class="py-3 px-4"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">تحويل</span></td>
+                                    <td class="py-3 px-4 text-blue-600 font-bold">$2,500</td>
+                                    <td class="py-3 px-4"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">مكتمل</span></td>
+                                    <td class="py-3 px-4 text-gray-500">2024-03-14 16:45</td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-3 px-4 font-mono text-xs text-gray-500">#TRX-001231</td>
+                                    <td class="py-3 px-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent font-bold text-xs">س</div><span class="font-medium text-gray-900">سارة محمد</span></div></td>
+                                    <td class="py-3 px-4"><span class="bg-purple-100 text-purple-700 px-2 py-1 rounded-full text-xs font-medium">شحن</span></td>
+                                    <td class="py-3 px-4 text-purple-600 font-bold">$50</td>
+                                    <td class="py-3 px-4"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">مكتمل</span></td>
+                                    <td class="py-3 px-4 text-gray-500">2024-03-14 14:20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Section -->
+            <div id="section-users" class="p-8 hidden">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <h2 class="text-2xl font-black text-gray-900">إدارة المستخدمين</h2>
+                    <div class="flex gap-3 w-full md:w-auto">
+                        <input type="text" placeholder="بحث عن مستخدم..." class="flex-1 md:w-64 bg-white border border-gray-200 rounded-xl px-4 py-2.5 focus:border-primary focus:outline-none" onkeyup="searchUsers(this.value)">
+                        <button class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold hover:bg-secondary transition whitespace-nowrap">
+                            <i class="fas fa-plus ml-2"></i> مستخدم جديد
+                        </button>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-gray-500 text-sm border-b border-gray-200 bg-gray-50">
+                                    <th class="text-right py-4 px-6 font-medium">المستخدم</th>
+                                    <th class="text-right py-4 px-6 font-medium">البريد / الهاتف</th>
+                                    <th class="text-right py-4 px-6 font-medium">الرصيد</th>
+                                    <th class="text-right py-4 px-6 font-medium">الحالة</th>
+                                    <th class="text-right py-4 px-6 font-medium">تاريخ التسجيل</th>
+                                    <th class="text-right py-4 px-6 font-medium">إجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm" id="users-table">
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">ع</div><div><div class="font-bold text-gray-900">عبدالله الشمري</div><div class="text-xs text-gray-500">#USR-1001</div></div></div></td>
+                                    <td class="py-4 px-6"><div>abdullah@email.com</div><div class="text-xs text-gray-500">+963 912 345 678</div></td>
+                                    <td class="py-4 px-6 text-primary font-bold text-lg">$25,000</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">نشط</span></td>
+                                    <td class="py-4 px-6 text-gray-500">2024-01-15</td>
+                                    <td class="py-4 px-6"><button class="text-primary hover:text-secondary transition p-2"><i class="fas fa-edit"></i></button> <button class="text-red-500 hover:text-red-700 transition p-2"><i class="fas fa-ban"></i></button></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent font-bold">ف</div><div><div class="font-bold text-gray-900">فاطمة الزهراء</div><div class="text-xs text-gray-500">#USR-1002</div></div></div></td>
+                                    <td class="py-4 px-6"><div>fatima@email.com</div><div class="text-xs text-gray-500">+963 933 444 555</div></td>
+                                    <td class="py-4 px-6 text-primary font-bold text-lg">$12,500</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">نشط</span></td>
+                                    <td class="py-4 px-6 text-gray-500">2024-02-01</td>
+                                    <td class="py-4 px-6"><button class="text-primary hover:text-secondary transition p-2"><i class="fas fa-edit"></i></button> <button class="text-red-500 hover:text-red-700 transition p-2"><i class="fas fa-ban"></i></button></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">م</div><div><div class="font-bold text-gray-900">محمد العلي</div><div class="text-xs text-gray-500">#USR-1003</div></div></div></td>
+                                    <td class="py-4 px-6"><div>mohamed@email.com</div><div class="text-xs text-gray-500">+963 955 666 777</div></td>
+                                    <td class="py-4 px-6 text-primary font-bold text-lg">$8,000</td>
+                                    <td class="py-4 px-6"><span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-medium">معلق</span></td>
+                                    <td class="py-4 px-6 text-gray-500">2024-02-15</td>
+                                    <td class="py-4 px-6"><button class="text-primary hover:text-secondary transition p-2"><i class="fas fa-edit"></i></button> <button class="text-red-500 hover:text-red-700 transition p-2"><i class="fas fa-ban"></i></button></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent font-bold">س</div><div><div class="font-bold text-gray-900">سارة محمد</div><div class="text-xs text-gray-500">#USR-1004</div></div></div></td>
+                                    <td class="py-4 px-6"><div>sara@email.com</div><div class="text-xs text-gray-500">+963 977 888 999</div></td>
+                                    <td class="py-4 px-6 text-primary font-bold text-lg">$15,300</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">نشط</span></td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-01</td>
+                                    <td class="py-4 px-6"><button class="text-primary hover:text-secondary transition p-2"><i class="fas fa-edit"></i></button> <button class="text-red-500 hover:text-red-700 transition p-2"><i class="fas fa-ban"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div id="section-transactions" class="p-8 hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-black text-gray-900">المعاملات المالية</h2>
+                    <div class="flex gap-3">
+                        <button class="bg-white border border-gray-200 px-4 py-2 rounded-xl text-gray-700 hover:border-primary transition"><i class="fas fa-filter ml-2"></i> تصفية</button>
+                        <button class="bg-primary text-white px-4 py-2 rounded-xl font-bold hover:bg-secondary transition"><i class="fas fa-file-export ml-2"></i> تصدير</button>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-gray-500 text-sm border-b border-gray-200 bg-gray-50">
+                                    <th class="text-right py-4 px-6 font-medium">رقم العملية</th>
+                                    <th class="text-right py-4 px-6 font-medium">المستخدم</th>
+                                    <th class="text-right py-4 px-6 font-medium">النوع</th>
+                                    <th class="text-right py-4 px-6 font-medium">المبلغ</th>
+                                    <th class="text-right py-4 px-6 font-medium">الرسوم</th>
+                                    <th class="text-right py-4 px-6 font-medium">التاريخ</th>
+                                    <th class="text-right py-4 px-6 font-medium">الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">#TRX-001234</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">عبدالله الشمري</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">إيداع</span></td>
+                                    <td class="py-4 px-6 text-green-600 font-bold">+$5,000</td>
+                                    <td class="py-4 px-6 text-gray-500">$0</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-15 10:30</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">مكتمل</span></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">#TRX-001233</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">فاطمة الزهراء</td>
+                                    <td class="py-4 px-6"><span class="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-medium">سحب</span></td>
+                                    <td class="py-4 px-6 text-red-600 font-bold">-$1,200</td>
+                                    <td class="py-4 px-6 text-gray-500">$5</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-15 09:15</td>
+                                    <td class="py-4 px-6"><span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-medium">قيد المعالجة</span></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">#TRX-001232</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">محمد العلي</td>
+                                    <td class="py-4 px-6"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">تحويل</span></td>
+                                    <td class="py-4 px-6 text-blue-600 font-bold">$2,500</td>
+                                    <td class="py-4 px-6 text-gray-500">$2.5</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-14 16:45</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">مكتمل</span></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">#TRX-001231</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">سارة محمد</td>
+                                    <td class="py-4 px-6"><span class="bg-purple-100 text-purple-700 px-2 py-1 rounded-full text-xs font-medium">شحن</span></td>
+                                    <td class="py-4 px-6 text-purple-600 font-bold">$50</td>
+                                    <td class="py-4 px-6 text-gray-500">$0.5</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-14 14:20</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">مكتمل</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transfers Section -->
+            <div id="section-transfers" class="p-8 hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-black text-gray-900">التحويلات المالية</h2>
+                    <button class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold hover:bg-secondary transition"><i class="fas fa-plus ml-2"></i> تحويل جديد</button>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-primary mb-2">$1.2M</div>
+                        <div class="text-gray-500">إجمالي التحويلات</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-accent mb-2">856</div>
+                        <div class="text-gray-500">عدد التحويلات</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-green-600 mb-2">$3,200</div>
+                        <div class="text-gray-500">الرسوم المحصلة</div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-gray-500 text-sm border-b border-gray-200 bg-gray-50">
+                                    <th class="text-right py-4 px-6 font-medium">رقم التحويل</th>
+                                    <th class="text-right py-4 px-6 font-medium">المرسل</th>
+                                    <th class="text-right py-4 px-6 font-medium">المستلم</th>
+                                    <th class="text-right py-4 px-6 font-medium">المبلغ</th>
+                                    <th class="text-right py-4 px-6 font-medium">الرسوم</th>
+                                    <th class="text-right py-4 px-6 font-medium">التاريخ</th>
+                                    <th class="text-right py-4 px-6 font-medium">الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">#TRF-00521</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">عبدالله الشمري</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">أحمد خالد</td>
+                                    <td class="py-4 px-6 text-primary font-bold">$2,500</td>
+                                    <td class="py-4 px-6 text-gray-500">$2.5</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-15 10:30</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">مكتمل</span></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">#TRF-00520</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">فاطمة الزهراء</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">نورا سامي</td>
+                                    <td class="py-4 px-6 text-primary font-bold">$1,000</td>
+                                    <td class="py-4 px-6 text-gray-500">$1</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-15 09:15</td>
+                                    <td class="py-4 px-6"><span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-medium">قيد المعالجة</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wallets Section -->
+            <div id="section-wallets" class="p-8 hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-black text-gray-900">المحافظ الإلكترونية</h2>
+                    <button class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold hover:bg-secondary transition"><i class="fas fa-plus ml-2"></i> محفظة جديدة</button>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-primary mb-2">$4.2M</div>
+                        <div class="text-gray-500">إجمالي الأرصدة</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-accent mb-2">12,847</div>
+                        <div class="text-gray-500">عدد المحافظ</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-green-600 mb-2">$850K</div>
+                        <div class="text-gray-500">الحركة اليومية</div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-gray-500 text-sm border-b border-gray-200 bg-gray-50">
+                                    <th class="text-right py-4 px-6 font-medium">المستخدم</th>
+                                    <th class="text-right py-4 px-6 font-medium">رقم المحفظة</th>
+                                    <th class="text-right py-4 px-6 font-medium">الرصيد</th>
+                                    <th class="text-right py-4 px-6 font-medium">العملة</th>
+                                    <th class="text-right py-4 px-6 font-medium">الحالة</th>
+                                    <th class="text-right py-4 px-6 font-medium">آخر تحديث</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-medium text-gray-900">عبدالله الشمري</td>
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">WAL-7823-9912</td>
+                                    <td class="py-4 px-6 text-primary font-bold text-lg">$25,000</td>
+                                    <td class="py-4 px-6">USD</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">نشطة</span></td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-15 10:30</td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-medium text-gray-900">فاطمة الزهراء</td>
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">WAL-7823-9913</td>
+                                    <td class="py-4 px-6 text-primary font-bold text-lg">$12,500</td>
+                                    <td class="py-4 px-6">USD</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">نشطة</span></td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-15 09:15</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Section -->
+            <div id="section-cards" class="p-8 hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-black text-gray-900">بطاقات الدفع</h2>
+                    <button class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold hover:bg-secondary transition"><i class="fas fa-plus ml-2"></i> بطاقة جديدة</button>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-primary mb-2">3,456</div>
+                        <div class="text-gray-500">إجمالي البطاقات</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-accent mb-2">2,891</div>
+                        <div class="text-gray-500">بطاقات نشطة</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-red-600 mb-2">565</div>
+                        <div class="text-gray-500">بطاقات معطلة</div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <div class="text-xs text-gray-500 mb-1">بطاقة افتراضية</div>
+                                <div class="font-bold text-gray-900">عبدالله الشمري</div>
+                            </div>
+                            <i class="fab fa-cc-visa text-3xl text-primary"></i>
+                        </div>
+                        <div class="font-mono text-lg tracking-widest text-gray-800 mb-4">**** **** **** 4521</div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <div class="text-xs text-gray-500">الرصيد</div>
+                                <div class="text-xl font-black text-primary">$5,000</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-500">تنتهي</div>
+                                <div class="font-medium">12/26</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <div class="text-xs text-gray-500 mb-1">بطاقة افتراضية</div>
+                                <div class="font-bold text-gray-900">فاطمة الزهراء</div>
+                            </div>
+                            <i class="fab fa-cc-mastercard text-3xl text-accent"></i>
+                        </div>
+                        <div class="font-mono text-lg tracking-widest text-gray-800 mb-4">**** **** **** 7893</div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <div class="text-xs text-gray-500">الرصيد</div>
+                                <div class="text-xl font-black text-accent">$3,200</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs text-gray-500">تنتهي</div>
+                                <div class="font-medium">09/25</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bills Section -->
+            <div id="section-bills" class="p-8 hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-black text-gray-900">الفواتير والمدفوعات</h2>
+                    <button class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold hover:bg-secondary transition"><i class="fas fa-plus ml-2"></i> فاتورة جديدة</button>
+                </div>
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-primary mb-2">$45K</div>
+                        <div class="text-gray-500">إجمالي الفواتير</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-green-600 mb-2">$38K</div>
+                        <div class="text-gray-500">المدفوعة</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-yellow-600 mb-2">$7K</div>
+                        <div class="text-gray-500">قيد الانتظار</div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100 text-center">
+                        <div class="text-3xl font-black text-red-600 mb-2">$0</div>
+                        <div class="text-gray-500">متأخرة</div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-gray-500 text-sm border-b border-gray-200 bg-gray-50">
+                                    <th class="text-right py-4 px-6 font-medium">رقم الفاتورة</th>
+                                    <th class="text-right py-4 px-6 font-medium">المستخدم</th>
+                                    <th class="text-right py-4 px-6 font-medium">النوع</th>
+                                    <th class="text-right py-4 px-6 font-medium">المبلغ</th>
+                                    <th class="text-right py-4 px-6 font-medium">تاريخ الاستحقاق</th>
+                                    <th class="text-right py-4 px-6 font-medium">الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">#BILL-00892</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">عبدالله الشمري</td>
+                                    <td class="py-4 px-6"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">كهرباء</span></td>
+                                    <td class="py-4 px-6 text-primary font-bold">$120</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-20</td>
+                                    <td class="py-4 px-6"><span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-medium">قيد الانتظار</span></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">#BILL-00891</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">فاطمة الزهراء</td>
+                                    <td class="py-4 px-6"><span class="bg-cyan-100 text-cyan-700 px-2 py-1 rounded-full text-xs font-medium">ماء</span></td>
+                                    <td class="py-4 px-6 text-primary font-bold">$45</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-18</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">مدفوعة</span></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-mono text-xs text-gray-500">#BILL-00890</td>
+                                    <td class="py-4 px-6 font-medium text-gray-900">محمد العلي</td>
+                                    <td class="py-4 px-6"><span class="bg-purple-100 text-purple-700 px-2 py-1 rounded-full text-xs font-medium">إنترنت</span></td>
+                                    <td class="py-4 px-6 text-primary font-bold">$80</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-25</td>
+                                    <td class="py-4 px-6"><span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-medium">قيد الانتظار</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="section-reports" class="p-8 hidden">
+                <h2 class="text-2xl font-black text-gray-900 mb-6">التقارير والإحصائيات</h2>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <h3 class="font-bold text-gray-900 mb-4">نمو المنصة</h3>
+                        <canvas id="growthChart" height="250"></canvas>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <h3 class="font-bold text-gray-900 mb-4">الإيرادات الشهرية</h3>
+                        <canvas id="revenueChart" height="250"></canvas>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <h3 class="font-bold text-gray-900 mb-4">توزيع المستخدمين حسب الدولة</h3>
+                        <canvas id="geoChart" height="250"></canvas>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <h3 class="font-bold text-gray-900 mb-4">أنواع المعاملات</h3>
+                        <canvas id="typesChart" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages Section -->
+            <div id="section-messages" class="p-8 hidden">
+                <h2 class="text-2xl font-black text-gray-900 mb-6">الرسائل والتواصل</h2>
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-100">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-gray-500 text-sm border-b border-gray-200 bg-gray-50">
+                                    <th class="text-right py-4 px-6 font-medium">المرسل</th>
+                                    <th class="text-right py-4 px-6 font-medium">البريد</th>
+                                    <th class="text-right py-4 px-6 font-medium">الموضوع</th>
+                                    <th class="text-right py-4 px-6 font-medium">الرسالة</th>
+                                    <th class="text-right py-4 px-6 font-medium">التاريخ</th>
+                                    <th class="text-right py-4 px-6 font-medium">الحالة</th>
+                                    <th class="text-right py-4 px-6 font-medium">إجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-bold text-gray-900">أحمد من مصر</td>
+                                    <td class="py-4 px-6 text-gray-500">ahmed@email.com</td>
+                                    <td class="py-4 px-6"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs font-medium">استفسار</span></td>
+                                    <td class="py-4 px-6 text-gray-600">كيف يمكنني فتح حساب جديد؟</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-15</td>
+                                    <td class="py-4 px-6"><span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-medium">جديد</span></td>
+                                    <td class="py-4 px-6"><button class="text-primary hover:text-secondary transition"><i class="fas fa-reply"></i> رد</button></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-bold text-gray-900">سارة من السعودية</td>
+                                    <td class="py-4 px-6 text-gray-500">sara@email.com</td>
+                                    <td class="py-4 px-6"><span class="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-medium">دعم فني</span></td>
+                                    <td class="py-4 px-6 text-gray-600">مشكلة في تسجيل الدخول</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-14</td>
+                                    <td class="py-4 px-6"><span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-medium">جديد</span></td>
+                                    <td class="py-4 px-6"><button class="text-primary hover:text-secondary transition"><i class="fas fa-reply"></i> رد</button></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+                                    <td class="py-4 px-6 font-bold text-gray-900">خالد من الإمارات</td>
+                                    <td class="py-4 px-6 text-gray-500">khaled@email.com</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">شراكة</span></td>
+                                    <td class="py-4 px-6 text-gray-600">أرغب في شراكة تجارية</td>
+                                    <td class="py-4 px-6 text-gray-500">2024-03-13</td>
+                                    <td class="py-4 px-6"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">تم الرد</span></td>
+                                    <td class="py-4 px-6"><button class="text-primary hover:text-secondary transition"><i class="fas fa-reply"></i> رد</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="section-settings" class="p-8 hidden">
+                <h2 class="text-2xl font-black text-gray-900 mb-6">إعدادات النظام</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <h3 class="font-bold text-gray-900 mb-4 flex items-center gap-2"><i class="fas fa-globe text-primary"></i> إعدادات الموقع</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-700">اسم الموقع</label>
+                                <input type="text" value="PROBANK" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-700">البريد الإلكتروني للدعم</label>
+                                <input type="email" value="support@probank.com" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-700">رقم الهاتف</label>
+                                <input type="text" value="+963-011-222-3333" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-700">العنوان</label>
+                                <textarea class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 h-20 resize-none focus:border-primary focus:outline-none transition">دمشق، سوريا - شارع الحمراء</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <h3 class="font-bold text-gray-900 mb-4 flex items-center gap-2"><i class="fas fa-paint-brush text-primary"></i> المظهر</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-700">اللون الرئيسي</label>
+                                <div class="flex gap-3">
+                                    <button class="w-10 h-10 rounded-full bg-teal-500 ring-2 ring-primary ring-offset-2"></button>
+                                    <button class="w-10 h-10 rounded-full bg-blue-500"></button>
+                                    <button class="w-10 h-10 rounded-full bg-green-500"></button>
+                                    <button class="w-10 h-10 rounded-full bg-purple-500"></button>
+                                    <button class="w-10 h-10 rounded-full bg-red-500"></button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-700">الشعار</label>
+                                <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center cursor-pointer hover:border-primary transition bg-gray-50">
+                                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                    <div class="text-sm text-gray-500">اسحب الصورة هنا أو انقر للاختيار</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between py-2">
+                                <span class="text-gray-700">الوضع الليلي</span>
+                                <div class="w-12 h-6 bg-gray-300 rounded-full relative cursor-pointer"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
+                            </div>
+                            <div class="flex items-center justify-between py-2">
+                                <span class="text-gray-700">الإشعارات</span>
+                                <div class="w-12 h-6 bg-primary rounded-full relative cursor-pointer"><div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <h3 class="font-bold text-gray-900 mb-4 flex items-center gap-2"><i class="fas fa-shield-halved text-primary"></i> الأمان</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-700">كلمة المرور الحالية</label>
+                                <input type="password" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-700">كلمة المرور الجديدة</label>
+                                <input type="password" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-700">تأكيد كلمة المرور</label>
+                                <input type="password" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:border-primary focus:outline-none transition">
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" checked class="rounded border-gray-300 text-primary focus:ring-primary w-5 h-5">
+                                <span class="text-sm text-gray-700">تفعيل المصادقة الثنائية</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-100">
+                        <h3 class="font-bold text-gray-900 mb-4 flex items-center gap-2"><i class="fas fa-bell text-primary"></i> الإشعارات</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                                <span class="text-sm text-gray-700">إشعارات تسجيل المستخدمين</span>
+                                <div class="w-12 h-6 bg-primary rounded-full relative cursor-pointer"><div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
+                            </div>
+                            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                                <span class="text-sm text-gray-700">إشعارات المعاملات</span>
+                                <div class="w-12 h-6 bg-primary rounded-full relative cursor-pointer"><div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
+                            </div>
+                            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                                <span class="text-sm text-gray-700">إشعارات السحوبات</span>
+                                <div class="w-12 h-6 bg-primary rounded-full relative cursor-pointer"><div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
+                            </div>
+                            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                                <span class="text-sm text-gray-700">التقارير الأسبوعية</span>
+                                <div class="w-12 h-6 bg-primary rounded-full relative cursor-pointer"><div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
+                            </div>
+                            <div class="flex items-center justify-between py-2">
+                                <span class="text-sm text-gray-700">إشعارات البريد</span>
+                                <div class="w-12 h-6 bg-gray-300 rounded-full relative cursor-pointer"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end gap-4">
+                    <button class="border border-gray-300 px-6 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition font-medium">إلغاء</button>
+                    <button class="bg-primary text-white px-6 py-2.5 rounded-xl font-bold hover:bg-secondary transition" onclick="saveSettings()">
+                        <i class="fas fa-save ml-2"></i> حفظ التغييرات
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="hidden fixed bottom-4 left-4 z-50 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 fade-in">
+        <i class="fas fa-check-circle text-green-400"></i>
+        <span id="toast-message">تمت العملية بنجاح</span>
+    </div>
+
+    <script>
+        // ==================== NAVIGATION ====================
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ==================== AUTH MODALS ====================
+        function showLogin() {
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('register-modal').classList.remove('hidden');
+        }
+
+        function showAdminLogin() {
+            document.getElementById('admin-login-modal').classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function switchAuth(type) {
+            closeModal('login-modal');
+            closeModal('register-modal');
+            if (type === 'login') {
+                setTimeout(() => showLogin(), 100);
+            } else {
+                setTimeout(() => showRegister(), 100);
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            showToast('تم تسجيل الدخول بنجاح!');
+            closeModal('login-modal');
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            showToast('تم إنشاء الحساب بنجاح!');
+            closeModal('register-modal');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast('تم إرسال رسالتك بنجاح!');
+            e.target.reset();
+        }
+
+        // ==================== ADMIN LOGIN ====================
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+
+            if (username === 'admin' && password === 'admin123') {
+                closeModal('admin-login-modal');
+                document.getElementById('public-site').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                document.body.style.backgroundColor = '#f3f4f6';
+                initCharts();
+                showToast('تم تسجيل الدخول للوحة الإدارة!');
+            } else {
+                showToast('اسم المستخدم أو كلمة المرور غير صحيحة!', 'error');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.getElementById('public-site').classList.remove('hidden');
+            document.body.style.backgroundColor = '#F0FDFA';
+            showToast('تم تسجيل الخروج بنجاح!');
+        }
+
+        // ==================== ADMIN NAVIGATION ====================
+        function showAdminSection(section) {
+            // Hide all sections
+            const sections = ['dashboard', 'users', 'transactions', 'transfers', 'wallets', 'cards', 'bills', 'reports', 'messages', 'settings'];
+            sections.forEach(s => {
+                document.getElementById('section-' + s).classList.add('hidden');
+                document.getElementById('nav-' + s).classList.remove('active');
+                document.getElementById('nav-' + s).querySelector('i').classList.remove('text-primary');
+                document.getElementById('nav-' + s).querySelector('i').classList.add('text-gray-400');
+            });
+
+            // Show selected section
+            document.getElementById('section-' + section).classList.remove('hidden');
+            document.getElementById('nav-' + section).classList.add('active');
+            document.getElementById('nav-' + section).querySelector('i').classList.remove('text-gray-400');
+            document.getElementById('nav-' + section).querySelector('i').classList.add('text-primary');
+
+            // Update title
+            const titles = {
+                'dashboard': 'لوحة التحكم',
+                'users': 'إدارة المستخدمين',
+                'transactions': 'المعاملات المالية',
+                'transfers': 'التحويلات المالية',
+                'wallets': 'المحافظ الإلكترونية',
+                'cards': 'بطاقات الدفع',
+                'bills': 'الفواتير والمدفوعات',
+                'reports': 'التقارير والإحصائيات',
+                'messages': 'الرسائل والتواصل',
+                'settings': 'إعدادات النظام'
+            };
+            document.getElementById('admin-title').textContent = titles[section];
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('admin-sidebar');
+            sidebar.classList.toggle('hidden');
+        }
+
+        // ==================== TOAST ====================
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function saveSettings() {
+            showToast('تم حفظ الإعدادات بنجاح!');
+        }
+
+        // ==================== CHARTS ====================
+        function initCharts() {
+            // Transaction Chart
+            const ctx1 = document.getElementById('transactionChart');
+            if (ctx1) {
+                new Chart(ctx1, {
+                    type: 'line',
+                    data: {
+                        labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+                        datasets: [{
+                            label: 'الإيداعات',
+                            data: [12000, 19000, 15000, 25000, 22000, 30000],
+                            borderColor: '#0D9488',
+                            backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }, {
+                            label: 'السحوبات',
+                            data: [8000, 12000, 10000, 15000, 13000, 18000],
+                            borderColor: '#EF4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { position: 'top', rtl: true } },
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+            }
+
+            // Services Chart
+            const ctx2 = document.getElementById('servicesChart');
+            if (ctx2) {
+                new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['تحويلات', 'شحن', 'فواتير', 'سحب', 'إيداع'],
+                        datasets: [{
+                            data: [35, 20, 15, 15, 15],
+                            backgroundColor: ['#0D9488', '#14B8A6', '#5EEAD4', '#2DD4BF', '#99F6E4']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { position: 'right', rtl: true } }
+                    }
+                });
+            }
+
+            // Growth Chart
+            const ctx3 = document.getElementById('growthChart');
+            if (ctx3) {
+                new Chart(ctx3, {
+                    type: 'bar',
+                    data: {
+                        labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+                        datasets: [{
+                            label: 'المستخدمين الجدد',
+                            data: [500, 800, 1200, 1500, 2000, 2500],
+                            backgroundColor: '#0D9488'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            // Revenue Chart
+            const ctx4 = document.getElementById('revenueChart');
+            if (ctx4) {
+                new Chart(ctx4, {
+                    type: 'line',
+                    data: {
+                        labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+                        datasets: [{
+                            label: 'الإيرادات',
+                            data: [15000, 22000, 18000, 28000, 25000, 35000],
+                            borderColor: '#14B8A6',
+                            backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            // Geo Chart
+            const ctx5 = document.getElementById('geoChart');
+            if (ctx5) {
+                new Chart(ctx5, {
+                    type: 'pie',
+                    data: {
+                        labels: ['سوريا', 'السعودية', 'الإمارات', 'مصر', 'أخرى'],
+                        datasets: [{
+                            data: [40, 25, 15, 10, 10],
+                            backgroundColor: ['#0D9488', '#14B8A6', '#5EEAD4', '#2DD4BF', '#99F6E4']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { position: 'right', rtl: true } }
+                    }
+                });
+            }
+
+            // Types Chart
+            const ctx6 = document.getElementById('typesChart');
+            if (ctx6) {
+                new Chart(ctx6, {
+                    type: 'bar',
+                    data: {
+                        labels: ['تحويل', 'شحن', 'فاتورة', 'سحب', 'إيداع'],
+                        datasets: [{
+                            label: 'عدد المعاملات',
+                            data: [450, 300, 200, 350, 400],
+                            backgroundColor: ['#0D9488', '#14B8A6', '#5EEAD4', '#2DD4BF', '#99F6E4']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+        }
+
+        function updateChart(period) {
+            showToast('تم تحديث البيانات لـ ' + period + ' أيام');
+        }
+
+        // ==================== SEARCH ====================
+        function searchUsers(query) {
+            const table = document.getElementById('users-table');
+            const rows = table.getElementsByTagName('tr');
+            for (let row of rows) {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(query.toLowerCase()) ? '' : 'none';
+            }
+        }
+
+        // ==================== TICKER ====================
+        function initTicker() {
+            const ticker = document.getElementById('ticker');
+            if (!ticker) return;
+            const coins = [
+                { name: 'USD/SYP', price: '12,500', change: '+0.5%' },
+                { name: 'EUR/USD', price: '1.08', change: '-0.2%' },
+                { name: 'BTC/USD', price: '67,245', change: '+2.1%' },
+                { name: 'ETH/USD', price: '3,520', change: '+1.5%' },
+                { name: 'Gold', price: '2,180', change: '+0.8%' }
+            ];
+
+            let html = '';
+            coins.forEach(coin => {
+                const color = coin.change.includes('+') ? 'text-green-500' : 'text-red-500';
+                html += `
+                    <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-gray-200 shadow-sm min-w-fit">
+                        <span class="font-bold text-gray-700">\${coin.name}</span>
+                        <span class="text-gray-900 font-mono">\${coin.price}</span>
+                        <span class="\${color} text-xs font-bold">\${coin.change}</span>
+                    </div>
+                `;
+            });
+            ticker.innerHTML = html;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initTicker();
+        });
+    </script>
+</body>
+</html>
+
