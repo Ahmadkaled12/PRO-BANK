@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROBANK - منصة الاستثمار الرقمية</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { cairo: ['Cairo', 'sans-serif'] },
+                    colors: {
+                        primary: '#0D9488',
+                        secondary: '#134E4A',
+                        accent: '#14B8A6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-teal-50">
+
+    <!-- Top Bar -->
+    <div class="bg-teal-900 text-white py-2 text-sm">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-6">
+                <span><i class="fas fa-phone ml-2"></i> 00963-011-222-3333</span>
+                <span><i class="fas fa-envelope ml-2"></i> support@probank.com</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hover:text-teal-300 transition"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-teal-300 transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-teal-300 transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-teal-300 transition"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-teal-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center text-white text-2xl shadow-lg">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black bg-gradient-to-r from-teal-600 to-teal-400 bg-clip-text text-transparent">PROBANK</span>
+                        <div class="text-xs text-gray-500">استثمارك الرقمي</div>
+                    </div>
+                </div>
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="#home" class="nav-link">الرئيسية</a>
+                    <a href="#about" class="nav-link">من نحن</a>
+                    <a href="#services" class="nav-link">خدماتنا</a>
+                    <a href="#investments" class="nav-link">فرص الاستثمار</a>
+                    <a href="#contact" class="nav-link">تواصل معنا</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="login.html" class="hidden md:block text-teal-600 hover:text-teal-800 transition font-medium">تسجيل الدخول</a>
+                    <a href="register.html" class="bg-gradient-to-r from-teal-500 to-teal-600 text-white px-6 py-2.5 rounded-full font-bold hover:shadow-lg hover:scale-105 transition pulse-glow">
+                        فتح حساب
+                    </a>
+                    <button onclick="openModal('admin-login-modal')" class="text-gray-400 hover:text-teal-600 text-sm" title="لوحة الإدارة">
+                        <i class="fas fa-cog text-lg"></i>
+                    </button>
+                    <button class="lg:hidden text-gray-700" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-3 space-y-2">
+                <a href="#home" class="block py-3 text-gray-700 hover:text-teal-600 transition border-b border-gray-100">الرئيسية</a>
+                <a href="#about" class="block py-3 text-gray-700 hover:text-teal-600 transition border-b border-gray-100">من نحن</a>
+                <a href="#services" class="block py-3 text-gray-700 hover:text-teal-600 transition border-b border-gray-100">خدماتنا</a>
+                <a href="#investments" class="block py-3 text-gray-700 hover:text-teal-600 transition border-b border-gray-100">فرص الاستثمار</a>
+                <a href="#contact" class="block py-3 text-gray-700 hover:text-teal-600 transition">تواصل معنا</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-20 pb-32 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-teal-600 via-teal-700 to-gray-900"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-right">
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-sm mb-6 backdrop-blur-sm">
+                        <i class="fas fa-award ml-2 text-yellow-400"></i> أفضل منصة استثمار في المنطقة
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight text-white">
+                        استثمر في <span class="text-teal-300">مستقبلك</span><br>بذكاء وأمان
+                    </h1>
+                    <p class="text-white/80 text-lg mb-8 leading-relaxed max-w-xl">
+                        PROBANK تقدم لك فرص استثمارية متنوعة في العملات الرقمية، الأسهم، والمشاريع الناشئة مع عوائد تصل إلى 35% سنوياً.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="register.html" class="bg-white text-teal-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-lg text-center">
+                            <i class="fas fa-rocket ml-2"></i> ابدأ الاستثمار
+                        </a>
+                        <a href="#investments" class="border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition text-center">
+                            <i class="fas fa-chart-pie ml-2"></i> استكشف الفرص
+                        </a>
+                    </div>
+                    <div class="mt-10 flex items-center gap-6 justify-center lg:justify-start">
+                        <div class="text-center">
+                            <div class="text-3xl font-black text-white">+50K</div>
+                            <div class="text-sm text-white/60">مستثمر</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/20"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-black text-white">+200</div>
+                            <div class="text-sm text-white/60">فرصة</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/20"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-black text-white">$15M</div>
+                            <div class="text-sm text-white/60">حجم الاستثمار</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative hidden lg:block">
+                    <div class="absolute inset-0 bg-teal-400/20 rounded-full blur-3xl"></div>
+                    <div class="relative bg-white rounded-3xl p-6 shadow-2xl float-anim">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm text-gray-500">محفظتي</span>
+                            <span class="text-green-500 text-sm font-bold"><i class="fas fa-arrow-up ml-1"></i> +12.5%</span>
+                        </div>
+                        <div class="text-3xl font-black text-gray-900 mb-2">$25,430.00</div>
+                        <div class="text-sm text-gray-400 mb-6">الرصيد الإجمالي</div>
+                        <div class="h-40 bg-gray-50 rounded-xl mb-4 p-4">
+                            <canvas id="heroChart"></canvas>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                            <div class="bg-teal-50 rounded-lg p-3">
+                                <div class="text-gray-400">العائد</div>
+                                <div class="text-teal-600 font-bold text-lg">+35%</div>
+                            </div>
+                            <div class="bg-green-50 rounded-lg p-3">
+                                <div class="text-gray-400">الربح</div>
+                                <div class="text-green-600 font-bold text-lg">$8,920</div>
+                            </div>
+                            <div class="bg-blue-50 rounded-lg p-3">
+                                <div class="text-gray-400">الاستثمارات</div>
+                                <div class="text-blue-600 font-bold text-lg">12</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 bg-white rounded-xl p-3 shadow-lg float-anim" style="animation-delay: 0.5s">
+                        <div class="flex items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-500">صفقة ناجحة</div>
+                                <div class="text-sm font-bold text-gray-900">+$1,250</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wave Bottom -->
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F0FDFA"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-teal-600 font-bold text-sm tracking-wider">من نحن</span>
+                <h2 class="text-3xl md:text-4xl font-black mt-2 text-gray-900">شريكك الموثوق في <span class="gradient-text">عالم الاستثمار</span></h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-br from-teal-100 to-teal-200 rounded-3xl transform -rotate-3"></div>
+                    <div class="relative bg-white rounded-3xl p-8 shadow-xl">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-teal-50 rounded-xl p-6 text-center border border-teal-100">
+                                <i class="fas fa-shield-halved text-teal-600 text-4xl mb-3"></i>
+                                <div class="font-bold text-gray-900">أمان تام</div>
+                                <div class="text-sm text-gray-500">تشفير بنكي متقدم</div>
+                            </div>
+                            <div class="bg-green-50 rounded-xl p-6 text-center border border-green-100">
+                                <i class="fas fa-chart-line text-green-600 text-4xl mb-3"></i>
+                                <div class="font-bold text-gray-900">عوائد مرتفعة</div>
+                                <div class="text-sm text-gray-500">حتى 35% سنوياً</div>
+                            </div>
+                            <div class="bg-blue-50 rounded-xl p-6 text-center border border-blue-100">
+                                <i class="fas fa-headset text-blue-600 text-4xl mb-3"></i>
+                                <div class="font-bold text-gray-900">دعم 24/7</div>
+                                <div class="text-sm text-gray-500">فريق متخصص</div>
+                            </div>
+                            <div class="bg-purple-50 rounded-xl p-6 text-center border border-purple-100">
+                                <i class="fas fa-mobile-screen text-purple-600 text-4xl mb-3"></i>
+                                <div class="font-bold text-gray-900">تطبيق ذكي</div>
+                                <div class="text-sm text-gray-500">إدارة من أي مكان</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900">نبني مستقبل استثماراتك معاً</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        PROBANK هي منصة استثمار رائدة تقدم حلولاً مالية متكاملة تجمع بين التقنية المتقدمة والخبرة الاستثمارية. نساعدك في بناء محفظة متنوعة تحقق عوائد مستدامة.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        منذ تأسيسنا، ساعدنا آلاف المستثمرين في تحقيق أهدافهم المالية من خلال فرص استثمارية مدروسة وآمنة.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-teal-600 text-xl"></i>
+                            <span class="text-gray-700">تراخيص رسمية</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-teal-600 text-xl"></i>
+                            <span class="text-gray-700">شفافية كاملة</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-teal-600 text-xl"></i>
+                            <span class="text-gray-700">عوائد مضمونة</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-teal-600 text-xl"></i>
+                            <span class="text-gray-700">سحب فوري</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-teal-600 font-bold text-sm tracking-wider">خدماتنا</span>
+                <h2 class="text-3xl md:text-4xl font-black mt-2 text-gray-900">حلول استثمارية <span class="gradient-text">متكاملة</span></h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card hover:shadow-xl transition group">
+                    <div class="w-16 h-16 rounded-2xl bg-teal-100 flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-coins text-teal-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">استثمار العملات الرقمية</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">استثمر في البيتكوين، الإيثيريوم، والعملات البديلة مع تحليلات فنية متقدمة.</p>
+                </div>
+                <div class="card hover:shadow-xl transition group">
+                    <div class="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-chart-bar text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">صناديق الاستثمار</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">صناديق متنوعة بإدارة احترافية لتحقيق أفضل عائد مع تنويع المخاطر.</p>
+                </div>
+                <div class="card hover:shadow-xl transition group">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-hand-holding-dollar text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">التداول الآلي</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">بوتات تداول ذكية تعمل بالذكاء الاصطناعي لتحقيق أفضل النتائج.</p>
+                </div>
+                <div class="card hover:shadow-xl transition group">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-graduation-cap text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">أكاديمية الاستثمار</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">دورات تعليمية من المبتدئ إلى الاحترافي مع خبراء التحليل المالي.</p>
+                </div>
+                <div class="card hover:shadow-xl transition group">
+                    <div class="w-16 h-16 rounded-2xl bg-orange-100 flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-users text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">استثمار جماعي</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">شارك في فرص كبيرة مع مجموعة من المستثمرين وخفض المخاطر.</p>
+                </div>
+                <div class="card hover:shadow-xl transition group">
+                    <div class="w-16 h-16 rounded-2xl bg-red-100 flex items-center justify-center mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-file-invoice-dollar text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">التقارير الذكية</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">تقارير مفصلة وتحليلات ذكية لأداء استثماراتك في الوقت الفعلي.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investments Section -->
+    <section id="investments" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-teal-600 font-bold text-sm tracking-wider">فرص الاستثمار</span>
+                <h2 class="text-3xl md:text-4xl font-black mt-2 text-gray-900">استثمر في <span class="gradient-text">أفضل الفرص</span></h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Investment Card 1 -->
+                <div class="card overflow-hidden hover:shadow-2xl transition group">
+                    <div class="h-48 bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center relative">
+                        <i class="fab fa-bitcoin text-8xl text-white/20 group-hover:scale-110 transition duration-500"></i>
+                        <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">نشط</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900">صندوق البيتكوين الذهبي</h3>
+                        <p class="text-gray-600 text-sm mb-4">استراتيجية شراء واستبقاء طويلة المدى في البيتكوين.</p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">العائد المتوقع</span>
+                                <span class="text-green-600 font-bold">+25% سنوياً</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">الحد الأدنى</span>
+                                <span class="text-teal-600 font-bold">$500</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">المدة</span>
+                                <span class="text-gray-700">12 شهر</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-teal-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <div class="text-xs text-gray-500 text-center">75% مكتمل - $750K / $1M</div>
+                        </div>
+                        <a href="register.html" class="block w-full bg-teal-600 text-white py-3 rounded-xl font-bold hover:bg-teal-700 transition text-center">استثمر الآن</a>
+                    </div>
+                </div>
+
+                <!-- Investment Card 2 -->
+                <div class="card overflow-hidden hover:shadow-2xl transition group">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center relative">
+                        <i class="fas fa-layer-group text-8xl text-white/20 group-hover:scale-110 transition duration-500"></i>
+                        <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">نشط</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900">محفظة العملات البديلة</h3>
+                        <p class="text-gray-600 text-sm mb-4">تنويع في أفضل 20 عملة بديلة مع إعادة توازن شهري.</p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">العائد المتوقع</span>
+                                <span class="text-green-600 font-bold">+35% سنوياً</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">الحد الأدنى</span>
+                                <span class="text-teal-600 font-bold">$1,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">المدة</span>
+                                <span class="text-gray-700">6 أشهر</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                            <div class="text-xs text-gray-500 text-center">45% مكتمل - $450K / $1M</div>
+                        </div>
+                        <a href="register.html" class="block w-full bg-teal-600 text-white py-3 rounded-xl font-bold hover:bg-teal-700 transition text-center">استثمر الآن</a>
+                    </div>
+                </div>
+
+                <!-- Investment Card 3 -->
+                <div class="card overflow-hidden hover:shadow-2xl transition group">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center relative">
+                        <i class="fas fa-microchip text-8xl text-white/20 group-hover:scale-110 transition duration-500"></i>
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold">قريباً</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900">صندوق التكنولوجيا</h3>
+                        <p class="text-gray-600 text-sm mb-4">استثمار في مشاريع البلوكتشين والتقنيات الناشئة.</p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">العائد المتوقع</span>
+                                <span class="text-green-600 font-bold">+50% سنوياً</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">الحد الأدنى</span>
+                                <span class="text-teal-600 font-bold">$5,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">المدة</span>
+                                <span class="text-gray-700">24 شهر</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-400 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <div class="text-xs text-gray-500 text-center">يبدأ قريباً</div>
+                        </div>
+                        <button class="block w-full border-2 border-teal-600 text-teal-600 py-3 rounded-xl font-bold hover:bg-teal-50 transition text-center">القائمة البريدية</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-teal-600 font-bold text-sm tracking-wider">تواصل معنا</span>
+                <h2 class="text-3xl md:text-4xl font-black mt-2 text-gray-900">نحن هنا <span class="gradient-text">للمساعدة</span></h2>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="card flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-location-dot text-teal-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900">العنوان</div>
+                            <div class="text-sm text-gray-500">دمشق، سوريا - شارع الحمراء</div>
+                        </div>
+                    </div>
+                    <div class="card flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-phone text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900">الهاتف</div>
+                            <div class="text-sm text-gray-500">00963-011-222-3333</div>
+                        </div>
+                    </div>
+                    <div class="card flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-envelope text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900">البريد الإلكتروني</div>
+                            <div class="text-sm text-gray-500">support@probank.com</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <div class="card">
+                        <form onsubmit="handleContactSubmit(event)">
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div class="form-group">
+                                    <label class="form-label">الاسم الكامل</label>
+                                    <input type="text" class="form-input" placeholder="محمد أحمد" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">البريد الإلكتروني</label>
+                                    <input type="email" class="form-input" placeholder="email@example.com" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-6">
+                                <label class="form-label">الموضوع</label>
+                                <select class="form-input">
+                                    <option>استفسار عام</option>
+                                    <option>دعم فني</option>
+                                    <option>شراكة استثمارية</option>
+                                    <option>شكوى</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-6">
+                                <label class="form-label">الرسالة</label>
+                                <textarea class="form-input h-32 resize-none" placeholder="اكتب رسالتك هنا..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-full py-4">
+                                <i class="fas fa-paper-plane ml-2"></i> إرسال الرسالة
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-teal-500 flex items-center justify-center text-white text-xl">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <span class="text-xl font-black">PROBANK</span>
+                            <div class="text-xs text-gray-400">استثمارك الرقمي</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">منصة استثمار رائدة تقدم حلولاً مالية متكاملة بأعلى معايير الأمان.</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-teal-500 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-teal-500 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-teal-500 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-teal-500 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">روابط سريعة</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#home" class="hover:text-teal-400 transition">الرئيسية</a></li>
+                        <li><a href="#about" class="hover:text-teal-400 transition">من نحن</a></li>
+                        <li><a href="#services" class="hover:text-teal-400 transition">خدماتنا</a></li>
+                        <li><a href="#investments" class="hover:text-teal-400 transition">فرص الاستثمار</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">الخدمات</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-teal-400 transition">استثمار العملات الرقمية</a></li>
+                        <li><a href="#" class="hover:text-teal-400 transition">صناديق الاستثمار</a></li>
+                        <li><a href="#" class="hover:text-teal-400 transition">التداول الآلي</a></li>
+                        <li><a href="#" class="hover:text-teal-400 transition">التقارير الذكية</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-6">النشرة البريدية</h4>
+                    <p class="text-gray-400 text-sm mb-4">اشترك للحصول على آخر الفرص الاستثمارية.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="بريدك الإلكتروني" class="flex-1 bg-white/10 border border-white/20 rounded-r-xl px-4 py-3 focus:border-teal-500 focus:outline-none text-sm">
+                        <button class="bg-teal-500 px-4 py-3 rounded-l-xl font-bold hover:bg-teal-600 transition text-sm">اشتراك</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2024 PROBANK. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="modal-overlay hidden" onclick="handleModalClick(event, 'admin-login-modal')">
+        <div class="modal-content modal-enter">
+            <button onclick="closeModal('admin-login-modal')" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600 transition">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 rounded-2xl bg-teal-100 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shield-halved text-teal-600 text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-black text-gray-900">لوحة الإدارة</h2>
+                <p class="text-gray-500 text-sm mt-2">تسجيل دخول المشرفين</p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">اسم المستخدم</label>
+                    <input type="text" id="admin-username" class="form-input" placeholder="admin" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">كلمة المرور</label>
+                    <input type="password" id="admin-password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-full py-3">
+                    <i class="fas fa-lock ml-2"></i> دخول لوحة الإدارة
+                </button>
+            </form>
+            <div class="mt-4 p-3 bg-teal-50 rounded-xl text-center text-sm border border-teal-100">
+                <span class="text-teal-600 font-bold">بيانات التجربة: </span>
+                <span class="text-gray-500">admin / admin123</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Hero Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('heroChart');
+            if (ctx && typeof Chart !== 'undefined') {
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+                        datasets: [{
+                            data: [15000, 18000, 16500, 22000, 21000, 25430],
+                            borderColor: '#0D9488',
+                            backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 0,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { display: false },
+                            y: { display: false }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>"""
+
+with open(f'{base_dir}/index.html', 'w', encoding='utf-8') as f:
+    f.write(index_html)
+
+print("✅ index.html created!")
