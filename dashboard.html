@@ -1,0 +1,289 @@
+# ==================== dashboard.html (لوحة تحكم المستخدم) ====================
+dashboard_html = """<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - PROBANK</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { cairo: ['Cairo', 'sans-serif'] },
+                    colors: { primary: '#0D9488', secondary: '#134E4A', accent: '#14B8A6' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="user-sidebar">
+        <div class="p-6 border-b border-gray-100">
+            <a href="../index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center text-white">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div>
+                    <div class="font-bold text-sm">PROBANK</div>
+                    <div class="text-xs text-gray-500">لوحة المستخدم</div>
+                </div>
+            </a>
+        </div>
+        <nav class="p-4 space-y-1">
+            <a href="dashboard.html" class="sidebar-item active">
+                <i class="fas fa-chart-line text-teal-600"></i>
+                <span>لوحة التحكم</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="fas fa-wallet text-gray-400"></i>
+                <span>محفظتي</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="fas fa-coins text-gray-400"></i>
+                <span>استثماراتي</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="fas fa-exchange-alt text-gray-400"></i>
+                <span>التحويلات</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="fas fa-credit-card text-gray-400"></i>
+                <span>البطاقات</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="fas fa-file-invoice-dollar text-gray-400"></i>
+                <span>الفواتير</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="fas fa-bell text-gray-400"></i>
+                <span>الإشعارات</span>
+                <span class="mr-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">3</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="fas fa-user text-gray-400"></i>
+                <span>الملف الشخصي</span>
+            </a>
+        </nav>
+        <div class="absolute bottom-0 right-0 w-full p-4 border-t border-gray-100 bg-white">
+            <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 transition">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>تسجيل الخروج</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center sticky top-0 z-30">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="lg:hidden text-gray-500 hover:text-teal-600 transition">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-xl font-black text-gray-900">لوحة التحكم</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="relative p-2 text-gray-400 hover:text-teal-600 transition">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+                </button>
+                <div class="flex items-center gap-3">
+                    <div class="text-right hidden sm:block">
+                        <div class="font-bold text-sm text-gray-900">محمد أحمد</div>
+                        <div class="text-xs text-gray-500">مستثمر</div>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center text-white font-bold">م</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-8">
+            <!-- Stats -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="stat-card">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <div class="text-gray-500 text-sm">الرصيد الإجمالي</div>
+                            <div class="text-3xl font-black text-gray-900 mt-1">$25,430</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center">
+                            <i class="fas fa-wallet text-teal-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="text-green-500 text-sm font-medium"><i class="fas fa-arrow-up ml-1"></i> +12.5% هذا الشهر</div>
+                </div>
+                <div class="stat-card">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <div class="text-gray-500 text-sm">الأرباح</div>
+                            <div class="text-3xl font-black text-gray-900 mt-1">$8,920</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="text-green-500 text-sm font-medium"><i class="fas fa-arrow-up ml-1"></i> +35% هذا العام</div>
+                </div>
+                <div class="stat-card">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <div class="text-gray-500 text-sm">الاستثمارات</div>
+                            <div class="text-3xl font-black text-gray-900 mt-1">12</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-coins text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="text-teal-600 text-sm font-medium">5 نشطة، 7 مكتملة</div>
+                </div>
+                <div class="stat-card">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <div class="text-gray-500 text-sm">العائد اليومي</div>
+                            <div class="text-3xl font-black text-gray-900 mt-1">$125</div>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
+                            <i class="fas fa-percent text-purple-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="text-green-500 text-sm font-medium"><i class="fas fa-arrow-up ml-1"></i> +2.1% عن الأمس</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-gray-900">أداء المحفظة</h3>
+                        <select class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-1 text-sm">
+                            <option>آخر 6 أشهر</option>
+                            <option>آخر سنة</option>
+                            <option>الكل</option>
+                        </select>
+                    </div>
+                    <canvas id="portfolioChart" height="250"></canvas>
+                </div>
+                <div class="card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-gray-900">توزيع الاستثمارات</h3>
+                    </div>
+                    <canvas id="distributionChart" height="250"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="card">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-gray-900">آخر النشاطات</h3>
+                    <a href="#" class="text-teal-600 text-sm font-medium hover:underline">عرض الكل</a>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>التاريخ</th>
+                                <th>النوع</th>
+                                <th>الوصف</th>
+                                <th>المبلغ</th>
+                                <th>الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-gray-500">2024-03-15</td>
+                                <td><span class="badge badge-success">ربح</span></td>
+                                <td class="font-medium text-gray-900">صندوق البيتكوين الذهبي</td>
+                                <td class="text-green-600 font-bold">+$625</td>
+                                <td><span class="badge badge-success">مكتمل</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-gray-500">2024-03-14</td>
+                                <td><span class="badge badge-info">إيداع</span></td>
+                                <td class="font-medium text-gray-900">إيداع جديد</td>
+                                <td class="text-teal-600 font-bold">+$5,000</td>
+                                <td><span class="badge badge-success">مكتمل</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-gray-500">2024-03-13</td>
+                                <td><span class="badge badge-warning">سحب</span></td>
+                                <td class="font-medium text-gray-900">سحب أرباح</td>
+                                <td class="text-red-600 font-bold">-$1,200</td>
+                                <td><span class="badge badge-success">مكتمل</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-gray-500">2024-03-12</td>
+                                <td><span class="badge badge-success">ربح</span></td>
+                                <td class="font-medium text-gray-900">محفظة العملات البديلة</td>
+                                <td class="text-green-600 font-bold">+$350</td>
+                                <td><span class="badge badge-success">مكتمل</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Portfolio Chart
+            const ctx1 = document.getElementById('portfolioChart');
+            if (ctx1) {
+                new Chart(ctx1, {
+                    type: 'line',
+                    data: {
+                        labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'],
+                        datasets: [{
+                            label: 'قيمة المحفظة',
+                            data: [20000, 21500, 21000, 23000, 24500, 25430],
+                            borderColor: '#0D9488',
+                            backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            // Distribution Chart
+            const ctx2 = document.getElementById('distributionChart');
+            if (ctx2) {
+                new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['بيتكوين', 'إيثيريوم', 'عملات بديلة', 'صناديق', 'نقد'],
+                        datasets: [{
+                            data: [30, 25, 20, 15, 10],
+                            backgroundColor: ['#0D9488', '#14B8A6', '#5EEAD4', '#2DD4BF', '#99F6E4']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'right', rtl: true }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>"""
+
+with open(f'{base_dir}/dashboard.html', 'w', encoding='utf-8') as f:
+    f.write(dashboard_html)
+
+print("✅ dashboard.html created!")
